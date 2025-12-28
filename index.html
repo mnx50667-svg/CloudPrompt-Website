@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CN3771NXMX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CN3771NXMX');
+    </script>
+    
+    <!-- Primary Meta Tags -->
+    <title>CloudPrompt - Your AI Prompts, Organized | Free Chrome Extension</title>
+    <meta name="title" content="CloudPrompt - Your AI Prompts, Organized | Free Chrome Extension">
+    <meta name="description" content="Save, organize, and access your AI prompts instantly. Free Chrome extension with Google Drive sync. Works with ChatGPT, Claude, Gemini, and more. Privacy-first.">
+    <meta name="keywords" content="AI prompts, prompt manager, ChatGPT, Claude, Gemini, Chrome extension, productivity, Google Drive, prompt engineering, free">
+    <meta name="author" content="CloudPrompt">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cloudprompt.app/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mnx50667-svg.github.io/CloudPrompt-Website/">
+    <meta property="og:title" content="CloudPrompt - Your AI Prompts, Organized">
+    <meta property="og:description" content="Save, organize, and access your AI prompts instantly. Free Chrome extension with Google Drive sync.">
+    <meta property="og:image" content="https://mnx50667-svg.github.io/CloudPrompt-Website/og-image.png">
+    <meta property="og:site_name" content="CloudPrompt">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://mnx50667-svg.github.io/CloudPrompt-Website/">
+    <meta name="twitter:title" content="CloudPrompt - Your AI Prompts, Organized">
+    <meta name="twitter:description" content="Save, organize, and access your AI prompts instantly. Free Chrome extension.">
+    <meta name="twitter:image" content="https://mnx50667-svg.github.io/CloudPrompt-Website/twitter-card.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="manifest" href="./site.webmanifest">
+    <meta name="theme-color" content="#0A0F1A">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "CloudPrompt",
+        "description": "Save, organize, and access your AI prompts instantly. Free Chrome extension with Google Drive sync.",
+        "url": "https://cloudprompt.app",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Chrome",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "CloudPrompt",
+            "url": "https://cloudprompt.app",
+            "email": "support@cloudprompt.app"
+        }
+    }
+    </script>
+    
+    <style>
+        /* ========================================
+           CSS VARIABLES & RESET
+           ======================================== */
+        :root {
+            /* Colors */
+            --bg-dark: #0A0F1A;
+            --bg-darker: #060912;
+            --bg-surface: #111827;
+            --bg-card: #1A1F2E;
+            --bg-card-hover: #232838;
+            
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --text-muted: #64748B;
+            
+            --accent-blue: #2D8CFF;
+            --accent-blue-hover: #1F7DE8;
+            --accent-blue-glow: rgba(45, 140, 255, 0.4);
+            --accent-cyan: #00D4FF;
+            --accent-purple: #8B5CF6;
+            --accent-green: #10B981;
+            --accent-orange: #F59E0B;
+            
+            --border-subtle: rgba(255, 255, 255, 0.06);
+            --border-light: rgba(255, 255, 255, 0.1);
+            
+            /* Typography */
+            --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            
+            /* Spacing */
+            --section-padding: 120px;
+            --container-max: 1200px;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-base: 300ms ease;
+            --transition-slow: 500ms ease;
+            
+            /* Border Radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 24px;
+        }
+        
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-dark);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* ========================================
+           UTILITY CLASSES
+           ======================================== */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-cyan) 50%, var(--accent-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+        }
+        
+        .section-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
+        }
+        
+        /* ========================================
+           BUTTONS
+           ======================================== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            font-family: var(--font-family);
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: var(--radius-md);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-hover) 100%);
+            color: white;
+            box-shadow: 0 4px 20px var(--accent-blue-glow);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--accent-blue-glow);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-light);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border-color: var(--border-light);
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 14px 16px;
+        }
+        
+        .btn-ghost:hover {
+            color: var(--text-primary);
+        }
+        
+        .btn-ghost svg {
+            transition: transform var(--transition-fast);
+        }
+        
+        .btn-ghost:hover svg {
+            transform: translateX(4px);
+        }
+        
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 0;
+            transition: all var(--transition-base);
+        }
+        
+        .nav.scrolled {
+            background: rgba(10, 15, 26, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .nav-brand img {
+            width: 36px;
+            height: 36px;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-link {
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+        }
+        
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: var(--bg-card);
+        }
+        
+        .nav-cta {
+            margin-left: 16px;
+        }
+        
+        .nav-mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                background: var(--bg-surface);
+                border-bottom: 1px solid var(--border-subtle);
+                padding: 16px;
+                gap: 4px;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-link {
+                width: 100%;
+                padding: 14px 16px;
+            }
+            
+            .nav-cta {
+                margin: 12px 0 0 0;
+                width: 100%;
+            }
+            
+            .nav-cta .btn {
+                width: 100%;
+            }
+            
+            .nav-mobile-toggle {
+                display: block;
+            }
+        }
+        
+        /* ========================================
+           HERO SECTION
+           ======================================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background Effects */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(45, 140, 255, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--bg-dark), transparent);
+            pointer-events: none;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent-green);
+            margin-bottom: 32px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .hero-title {
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 800;
+            line-height: 1.1;
+            color: var(--text-primary);
+            margin-bottom: 24px;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 48px;
+            flex-wrap: wrap;
+        }
+        
+        .hero-trust {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        .trust-item svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent-blue);
+        }
+        
+        /* Hero Image */
+        .hero-visual {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero-screenshot {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .hero-screenshot img {
+            width: 100%;
+            max-width: 380px;
+            border-radius: var(--radius-xl);
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.5),
+                0 0 0 1px var(--border-subtle);
+        }
+        
+        .hero-screenshot::before {
+            content: '';
+            position: absolute;
+            inset: -30px;
+            background: radial-gradient(circle, var(--accent-blue-glow) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: -1;
+        }
+        
+        @media (max-width: 968px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .hero-trust {
+                justify-content: center;
+            }
+            
+            .hero-visual {
+                order: -1;
+                margin-bottom: 40px;
+            }
+            
+            .hero-screenshot img {
+                max-width: 300px;
+            }
+        }
+        
+        /* ========================================
+           PROBLEM SECTION
+           ======================================== */
+        .problem {
+            padding: var(--section-padding) 0;
+            position: relative;
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        
+        .problem-stat {
+            font-size: clamp(48px, 8vw, 72px);
+            font-weight: 800;
+            color: var(--accent-orange);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        
+        .problem-stat-label {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+        
+        .pain-points {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        
+        .pain-point {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.1);
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+        }
+        
+        .pain-point-icon {
+            font-size: 24px;
+        }
+        
+        .problem-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .problem-illustration {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            padding: 40px;
+        }
+        
+        .problem-emoji {
+            font-size: 80px;
+            animation: shake 2s ease-in-out infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+        }
+        
+        .problem-illustration p {
+            font-size: 18px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .problem-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+            
+            .problem-visual {
+                order: -1;
+            }
+        }
+        
+        /* ========================================
+           SOLUTION SECTION
+           ======================================== */
+        .solution {
+            padding: var(--section-padding) 0;
+            text-align: center;
+        }
+        
+        .solution-header {
+            max-width: 600px;
+            margin: 0 auto 64px;
+        }
+        
+        .solution-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        .solution-card {
+            background: rgba(26, 31, 46, 0.6);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            text-align: center;
+            transition: all var(--transition-base);
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .solution-card-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            font-size: 32px;
+            margin: 0 auto 24px;
+        }
+        
+        .solution-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        
+        .solution-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .solution-cards {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+        
+        /* ========================================
+           FEATURES SECTION
+           ======================================== */
+        .features {
+            padding: var(--section-padding) 0;
+        }
+        
+        .features-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 80px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: all var(--transition-base);
+        }
+        
+        .feature-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-2px);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+            border-radius: var(--radius-sm);
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 968px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* ========================================
+           HOW IT WORKS SECTION
+           ======================================== */
+        .how-it-works {
+            padding: var(--section-padding) 0;
+            background: var(--bg-surface);
+        }
+        
+        .how-it-works-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 64px;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 32px;
+            left: 80px;
+            right: 80px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan), var(--accent-green));
+            opacity: 0.3;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-blue);
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+        
+        .step h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+        
+        .step p {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 160px;
+        }
+        
+        @media (max-width: 768px) {
+            .steps {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+            
+            .step {
+                flex-direction: row;
+                text-align: left;
+                gap: 20px;
+            }
+            
+            .step-number {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+            
+            .step p {
+                max-width: none;
+            }
+        }
+        
+        /* ========================================
+           COMPATIBILITY SECTION
+           ======================================== */
+        .compatibility {
+            padding: var(--section-padding) 0;
+            text-align: center;
+        }
+        
+        .compatibility-header {
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+        
+        .platforms {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        
+        .platform {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all var(--transition-base);
+        }
+        
+        .platform:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+        
+        .platform-icon {
+            font-size: 24px;
+        }
+        
+        .compatibility-note {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+        
+        /* ========================================
+           FAQ SECTION
+           ======================================== */
+        .faq {
+            padding: var(--section-padding) 0;
+            background: var(--bg-surface);
+        }
+        
+        .faq-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 64px;
+        }
+        
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px;
+            background: none;
+            border: none;
+            font-family: var(--font-family);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: left;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .faq-question:hover {
+            color: var(--accent-blue);
+        }
+        
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            transition: transform var(--transition-base);
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-base);
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+        
+        .faq-answer-inner {
+            padding: 0 24px 24px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* ========================================
+           CTA SECTION
+           ======================================== */
+        .cta {
+            padding: var(--section-padding) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(45, 140, 255, 0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .cta-title {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+        
+        .cta-subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        /* ========================================
+           FOOTER
+           ======================================== */
+        .footer {
+            padding: 64px 0 32px;
+            border-top: 1px solid var(--border-subtle);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+        
+        .footer-brand p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 16px;
+            max-width: 280px;
+            line-height: 1.6;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+        
+        .footer-social a:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            color: white;
+        }
+        
+        .footer-column h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .footer-link {
+            font-size: 14px;
+            color: var(--text-muted);
+            transition: color var(--transition-fast);
+        }
+        
+        .footer-link:hover {
+            color: var(--text-primary);
+        }
+        
+        .footer-link.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .footer-link .coming-soon {
+            font-size: 10px;
+            background: var(--bg-card);
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+        
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 24px;
+        }
+        
+        @media (max-width: 968px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .footer-brand {
+                grid-column: span 2;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-brand {
+                grid-column: span 1;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+        }
+        
+        /* ========================================
+           ANIMATIONS
+           ======================================== */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Stagger delays */
+        .fade-in-up:nth-child(1) { transition-delay: 0ms; }
+        .fade-in-up:nth-child(2) { transition-delay: 100ms; }
+        .fade-in-up:nth-child(3) { transition-delay: 200ms; }
+        .fade-in-up:nth-child(4) { transition-delay: 300ms; }
+        .fade-in-up:nth-child(5) { transition-delay: 400ms; }
+        .fade-in-up:nth-child(6) { transition-delay: 500ms; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="./" class="nav-brand">
+                <img src="./logo.png" alt="CloudPrompt">
+                CloudPrompt
+            </a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <div class="nav-cta">
+                    <a href="#" class="btn btn-primary" id="chromeStoreBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <line x1="21.17" y1="8" x2="12" y2="8"></line>
+                            <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
+                            <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
+                        </svg>
+                        Add to Chrome - Free
+                    </a>
+                </div>
+            </div>
+            
+            <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle navigation">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>🚀</span>
+                        Now Available on Chrome Web Store
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        Your AI Prompts,<br>
+                        <span class="gradient-text">Organized.</span>
+                    </h1>
+                    
+                    <p class="hero-subtitle">
+                        Save, search, and access your prompts instantly. Synced to your Google Drive. Free forever.
+                    </p>
+                    
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary" id="heroCtaBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <line x1="21.17" y1="8" x2="12" y2="8"></line>
+                                <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
+                                <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
+                            </svg>
+                            Add to Chrome - It's Free
+                        </a>
+                        <a href="#how-it-works" class="btn btn-ghost">
+                            See How It Works
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    
+                    <div class="hero-trust">
+                        <div class="trust-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                            Free Forever
+                        </div>
+                        <div class="trust-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            Privacy-First
+                        </div>
+                        <div class="trust-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+                            </svg>
+                            Cloud Sync
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="hero-screenshot">
+                        <img src="./hero-popup.png" alt="CloudPrompt Extension - Save, organize, and access your AI prompts instantly">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem Section -->
+    <section class="problem">
+        <div class="container">
+            <div class="problem-grid">
+                <div class="problem-content fade-in-up">
+                    <span class="section-label">The Problem</span>
+                    <h2 class="section-title">Stop Losing Your Best Prompts</h2>
+                    
+                    <div class="problem-stat">37.5%</div>
+                    <p class="problem-stat-label">of AI users waste time recreating prompts they've already written.</p>
+                    
+                    <div class="pain-points">
+                        <div class="pain-point">
+                            <span class="pain-point-icon">😤</span>
+                            <span>Searching through endless old chats</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-point-icon">🔄</span>
+                            <span>Recreating prompts from scratch</span>
+                        </div>
+                        <div class="pain-point">
+                            <span class="pain-point-icon">💭</span>
+                            <span>Forgetting what actually worked</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="problem-visual fade-in-up">
+                    <div class="problem-illustration">
+                        <div class="problem-emoji">😵‍💫</div>
+                        <p>Where did I put that prompt?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <div class="solution-header fade-in-up">
+                <span class="section-label">The Solution</span>
+                <h2 class="section-title">CloudPrompt Makes It Simple</h2>
+                <p class="section-subtitle">Save once. Access anywhere. Never lose a prompt again.</p>
+            </div>
+            
+            <div class="solution-cards">
+                <div class="solution-card fade-in-up">
+                    <div class="solution-card-icon">⚡</div>
+                    <h3>Instant Access</h3>
+                    <p>Press Ctrl+Shift+Y anywhere. Your prompts appear instantly on any website.</p>
+                </div>
+                
+                <div class="solution-card fade-in-up">
+                    <div class="solution-card-icon">☁️</div>
+                    <h3>Google Drive Sync</h3>
+                    <p>Auto-synced to your personal Drive. Access from any device, anytime.</p>
+                </div>
+                
+                <div class="solution-card fade-in-up">
+                    <div class="solution-card-icon">🔒</div>
+                    <h3>Privacy-First</h3>
+                    <p>Your data stays in YOUR Google Drive. We literally cannot see your prompts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="features-header fade-in-up">
+                <span class="section-label">Features</span>
+                <h2 class="section-title">Everything You Need</h2>
+                <p class="section-subtitle">Powerful features to supercharge your AI workflow.</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                        </svg>
+                    </div>
+                    <h3>Lightning-Fast Access</h3>
+                    <p>Press Ctrl+Shift+Y anywhere to instantly access your prompts. Works on ChatGPT, Claude, Gemini - any website.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3>Organize Your Way</h3>
+                    <p>Folders, tags, and powerful real-time search. Find exactly what you need in seconds.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="17" x2="12" y2="22"></line>
+                            <path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path>
+                        </svg>
+                    </div>
+                    <h3>Pin Your Favorites</h3>
+                    <p>Keep your top 3 prompts pinned for one-click access. Always visible at the top of your list.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <path d="M12 18v-6"></path>
+                            <path d="M9 15h6"></path>
+                        </svg>
+                    </div>
+                    <h3>Powerful Templates</h3>
+                    <p>Create reusable templates with [VARIABLE] placeholders. Fill in the blanks and go.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </div>
+                    <h3>Beautiful Dark Mode</h3>
+                    <p>Easy on your eyes. Auto theme detection follows your system, or choose manually.</p>
+                </div>
+                
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Import & Export</h3>
+                    <p>Your data, your control. Export anytime as JSON or CSV. Full backup and portability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="how-it-works-header fade-in-up">
+                <span class="section-label">How It Works</span>
+                <h2 class="section-title">Get Started in 60 Seconds</h2>
+            </div>
+            
+            <div class="steps">
+                <div class="step fade-in-up">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Install</h3>
+                        <p>Add CloudPrompt from Chrome Web Store</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in-up">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>Connect</h3>
+                        <p>Sign in with your Google account</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in-up">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Save</h3>
+                        <p>Click + to save your first prompt</p>
+                    </div>
+                </div>
+                
+                <div class="step fade-in-up">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h3>Access</h3>
+                        <p>Press Ctrl+Shift+Y anywhere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Compatibility Section -->
+    <section class="compatibility">
+        <div class="container">
+            <div class="compatibility-header fade-in-up">
+                <span class="section-label">Compatibility</span>
+                <h2 class="section-title">Works With Your Favorite AI Tools</h2>
+            </div>
+            
+            <div class="platforms fade-in-up">
+                <div class="platform">
+                    <span class="platform-icon">💬</span>
+                    ChatGPT
+                </div>
+                <div class="platform">
+                    <span class="platform-icon">🤖</span>
+                    Claude
+                </div>
+                <div class="platform">
+                    <span class="platform-icon">✨</span>
+                    Gemini
+                </div>
+                <div class="platform">
+                    <span class="platform-icon">🔍</span>
+                    Perplexity
+                </div>
+                <div class="platform">
+                    <span class="platform-icon">💡</span>
+                    Poe
+                </div>
+            </div>
+            
+            <p class="compatibility-note fade-in-up">...and any website where you use AI</p>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="faq-header fade-in-up">
+                <span class="section-label">FAQ</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item fade-in-up">
+                    <button class="faq-question">
+                        Is CloudPrompt really free?
+                        <span class="faq-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Yes! CloudPrompt is 100% free with no hidden limits. You get unlimited prompt storage (limited only by your Google Drive space), basic templates, pin system, and full import/export. We may add optional premium features in the future, but the core functionality will always be free.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in-up">
+                    <button class="faq-question">
+                        Where is my data stored?
+                        <span class="faq-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Your prompts are stored in YOUR personal Google Drive, in a folder called 'CloudPrompt'. We never see or access your data. You own 100% of your prompts, and they stay in your Drive even if you uninstall the extension.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in-up">
+                    <button class="faq-question">
+                        What permissions does CloudPrompt need?
+                        <span class="faq-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            We only request the minimum permissions needed: storage (for local caching) and Google Drive file access limited to files we create (drive.file scope). We cannot access your other Drive files - ever.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in-up">
+                    <button class="faq-question">
+                        Does it work offline?
+                        <span class="faq-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Yes! CloudPrompt caches your prompts locally, so you can access them even without an internet connection. Changes sync automatically when you're back online.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in-up">
+                    <button class="faq-question">
+                        Can I use it with Claude/Gemini/other AI tools?
+                        <span class="faq-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Absolutely! CloudPrompt works on ANY website. Press Ctrl+Shift+Y anywhere to access your prompts - ChatGPT, Claude, Gemini, Perplexity, or any other site.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item fade-in-up">
+                    <button class="faq-question">
+                        How do I export my data?
+                        <span class="faq-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Go to Settings > Backup & Restore > Export. You can download all your prompts as JSON or CSV anytime. Your data is always portable and under your control.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content fade-in-up">
+                <h2 class="cta-title">Ready to Organize Your Prompts?</h2>
+                <p class="cta-subtitle">Join thousands of AI users who stopped losing their best prompts.</p>
+                
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary" id="ctaBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <line x1="21.17" y1="8" x2="12" y2="8"></line>
+                            <line x1="3.95" y1="6.06" x2="8.54" y2="14"></line>
+                            <line x1="10.88" y1="21.94" x2="15.46" y2="14"></line>
+                        </svg>
+                        Add to Chrome - It's Free
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="./" class="nav-brand">
+                        <img src="./logo.png" alt="CloudPrompt" width="36" height="36">
+                        CloudPrompt
+                    </a>
+                    <p>Your AI prompts, organized. Save, search, and access instantly with Google Drive sync.</p>
+                    <div class="footer-social">
+                        <a href="https://www.linkedin.com/company/cloudprompt-ai" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Product</h4>
+                    <div class="footer-links">
+                        <a href="#features" class="footer-link">Features</a>
+                        <a href="#how-it-works" class="footer-link">How It Works</a>
+                        <a href="#faq" class="footer-link">FAQ</a>
+                        <a href="#" class="footer-link" id="footerChromeLink">Chrome Web Store</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <div class="footer-links">
+                        <a href="./privacy.html" class="footer-link">Privacy Policy</a>
+                        <a href="./terms.html" class="footer-link">Terms of Service</a>
+                        <a href="mailto:support@cloudprompt.app" class="footer-link">Support</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Coming Soon</h4>
+                    <div class="footer-links">
+                        <span class="footer-link disabled">Pricing <span class="coming-soon">Soon</span></span>
+                        <span class="footer-link disabled">Blog <span class="coming-soon">Soon</span></span>
+                        <span class="footer-link disabled">Changelog <span class="coming-soon">Soon</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>© 2025 CloudPrompt. All rights reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="./privacy.html" class="footer-link">Privacy</a>
+                    <a href="./terms.html" class="footer-link">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // ========================================
+        // NAVIGATION
+        // ========================================
+        const nav = document.getElementById('nav');
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        // Scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // ========================================
+        // FAQ ACCORDION
+        // ========================================
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all
+                faqItems.forEach(i => i.classList.remove('active'));
+                
+                // Open clicked (if wasn't active)
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // ========================================
+        // SCROLL ANIMATIONS
+        // ========================================
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // ========================================
+        // CHROME WEB STORE LINK
+        // ========================================
+        // TODO: Replace with actual Chrome Web Store URL when approved
+        const chromeStoreUrl = '#'; // Will be updated with actual URL
+        
+        document.querySelectorAll('#chromeStoreBtn, #heroCtaBtn, #ctaBtn, #footerChromeLink').forEach(btn => {
+            btn.href = chromeStoreUrl;
+        });
+        
+        // ========================================
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                
+                e.preventDefault();
+          
